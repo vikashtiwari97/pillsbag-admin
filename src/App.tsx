@@ -5,7 +5,7 @@ import FormElementsPage from "@/pages/main/forms/form-elements";
 import { BlankPage, Error404Page } from "@/pages/main/pages";
 import ProfilePage from "@/pages/main/profile";
 import BasicTablesPage from "@/pages/main/tables/basic-tables";
-import { AuthLayout, SignInPage, SignUpPage } from "@/pages/others/auth";
+import { AuthLayout, SignInPage } from "@/pages/others/auth";
 import BarChartPage from "@/pages/others/charts/bar-chart";
 import LineChartPage from "@/pages/others/charts/line-chart";
 import Alerts from "@/pages/others/ui-elements/alerts";
@@ -51,7 +51,6 @@ export default function App() {
       {/* Auth Layout */}
       <Route element={<AuthLayout />}>
         <Route path="/signin" element={<SignInPage />} />
-        <Route path="/signup" element={<SignUpPage />} />
       </Route>
 
       {/* Full-width / Error / Status Pages */}

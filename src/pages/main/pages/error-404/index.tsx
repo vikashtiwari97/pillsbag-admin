@@ -24,20 +24,28 @@ export default function Error404({
           {title}
         </h1>
 
-        <img
-          src="/images/error/404.svg"
-          alt="404"
-          className="dark:hidden"
-          width={472}
-          height={152}
-        />
-        <img
-          src="/images/error/404-dark.svg"
-          alt="404"
-          className="hidden dark:block"
-          width={472}
-          height={152}
-        />
+        <div className="my-4 flex items-center justify-center gap-2 sm:gap-4 select-none">
+          <span className="font-outfit text-8xl font-extrabold tracking-tight text-brand-500 sm:text-[140px] leading-none">
+            4
+          </span>
+          <div className="flex size-20 sm:size-32 items-center justify-center rounded-3xl border-4 border-brand-500 bg-brand-50 dark:bg-brand-500/10 shadow-lg">
+            <svg
+              className="size-12 sm:size-20 text-brand-500"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M10.5 20.5 19 12a4.95 4.95 0 1 0-7-7l-8.5 8.5a4.95 4.95 0 0 0 7 7Z" />
+              <path d="m8.5 8.5 7 7" />
+            </svg>
+          </div>
+          <span className="font-outfit text-8xl font-extrabold tracking-tight text-brand-500 sm:text-[140px] leading-none">
+            4
+          </span>
+        </div>
 
         <p className="mt-10 mb-6 text-base text-gray-700 sm:text-lg dark:text-gray-400">
           {description}
@@ -55,7 +63,7 @@ export default function Error404({
       </div>
 
       <p className="absolute inset-s-1/2 bottom-6 -translate-x-1/2 text-center text-sm text-gray-500 rtl:translate-x-1/2 dark:text-gray-400">
-        &copy; {new Date().getFullYear()} - TailAdmin
+        &copy; {new Date().getFullYear()} - PillsBag
       </p>
     </div>
   );

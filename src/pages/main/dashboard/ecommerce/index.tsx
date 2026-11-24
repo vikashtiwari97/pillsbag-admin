@@ -1,10 +1,6 @@
-import { PageMeta } from "@/components/shared/page-meta";
-import DemographicCard from "./components/demographic-card";
 import EcommerceMetrics from "./components/metrics";
 import MonthlySalesChart from "./components/monthly-sales-chart";
-import MonthlyTarget from "./components/monthly-target";
 import RecentOrders from "./components/recent-orders";
-import StatisticsChart from "./components/statistics-chart";
 
 export default function EcommercePage() {
   return (
