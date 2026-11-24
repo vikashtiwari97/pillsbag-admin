@@ -44,17 +44,17 @@ layer(base);
   --color-white: #ffffff;
   --color-black: #101828;
 
-  --color-brand-50: rgba(236, 243, 255, 1);
-  --color-brand-100: rgba(221, 233, 255, 1);
-  --color-brand-200: rgba(194, 214, 255, 1);
-  --color-brand-300: rgba(156, 185, 255, 1);
-  --color-brand-400: rgba(117, 146, 255, 1);
-  --color-brand-500: rgba(70, 95, 255, 1);
-  --color-brand-600: rgba(54, 65, 245, 1);
-  --color-brand-700: rgba(42, 49, 216, 1);
-  --color-brand-800: rgba(37, 45, 174, 1);
-  --color-brand-900: rgba(38, 46, 137, 1);
-  --color-brand-950: rgba(22, 25, 80, 1);
+  --color-brand-50: rgba(227, 252, 237, 1);
+  --color-brand-100: rgba(198, 248, 218, 1);
+  --color-brand-200: rgba(147, 240, 185, 1);
+  --color-brand-300: rgba(85, 226, 147, 1);
+  --color-brand-400: rgba(30, 209, 111, 1);
+  --color-brand-500: rgba(0, 200, 83, 1);
+  --color-brand-600: rgba(0, 168, 70, 1);
+  --color-brand-700: rgba(0, 133, 56, 1);
+  --color-brand-800: rgba(6, 105, 48, 1);
+  --color-brand-900: rgba(7, 86, 41, 1);
+  --color-brand-950: rgba(2, 48, 21, 1);
 
   --shadow-theme-md:
     0px 4px 8px -2px rgba(16, 24, 40, 0.1),
@@ -70,7 +70,7 @@ layer(base);
     0px 20px 24px -4px rgba(16, 24, 40, 0.08),
     0px 8px 8px -4px rgba(16, 24, 40, 0.03);
   --shadow-datepicker: -5px 0 0 #262d3c, 5px 0 0 #262d3c;
-  --shadow-focus-ring: 0px 0px 0px 4px rgba(70, 95, 255, 0.12);
+  --shadow-focus-ring: 0px 0px 0px 4px rgba(0, 200, 83, 0.12);
   --shadow-slider-navigation:
     0px 1px 2px 0px rgba(16, 24, 40, 0.1), 0px 1px 3px 0px rgba(16, 24, 40, 0.1);
   --shadow-tooltip:
@@ -579,14 +579,14 @@ span.flatpickr-weekday,
 .flatpickr-day.selected.nextMonthDay,
 .flatpickr-day.startRange.nextMonthDay,
 .flatpickr-day.endRange.nextMonthDay {
-  background: #465fff;
+  background: #00c853;
   @apply border-brand-500! bg-brand-500! hover:border-brand-500! hover:bg-brand-500!;
 }
 
 .flatpickr-day.selected.startRange + .endRange:not(:nth-child(7n + 1)),
 .flatpickr-day.startRange.startRange + .endRange:not(:nth-child(7n + 1)),
 .flatpickr-day.endRange.startRange + .endRange:not(:nth-child(7n + 1)) {
-  box-shadow: -10px 0 0 #465fff;
+  box-shadow: -10px 0 0 #00c853;
 }
 
 [dir="rtl"]
@@ -598,7 +598,7 @@ span.flatpickr-weekday,
 [dir="rtl"]
   .flatpickr-day.endRange.startRange
   + .endRange:not(:nth-child(7n + 1)) {
-  box-shadow: 10px 0 0 #465fff;
+  box-shadow: 10px 0 0 #00c853;
 }
 
 .flatpickr-months .flatpickr-prev-month svg,

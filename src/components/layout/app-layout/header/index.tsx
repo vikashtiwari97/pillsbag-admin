@@ -15,6 +15,7 @@ import { HorizontalDotsIcon, MenuTwoIcon, SearchIcon, XIcon } from "@/icons";
 import { cn } from "@/utils";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
+import logo from "@/assets/Pill-Bag-Logo.png";
 
 export default function AppHeader() {
   const t = useTranslations("header");
@@ -62,14 +63,9 @@ export default function AppHeader() {
 
           <Link to="/" className="xl:hidden">
             <img
-              className="h-8 w-38.5 dark:hidden"
-              src="/images/logo/logo.svg"
-              alt="Logo"
-            />
-            <img
-              className="hidden h-8 w-38.5 dark:block"
-              src="/images/logo/logo-dark.svg"
-              alt="Logo"
+              className="h-10 w-auto object-contain"
+              src={logo}
+              alt="PillsBag Logo"
             />
           </Link>
 
