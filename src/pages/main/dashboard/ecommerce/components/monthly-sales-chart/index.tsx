@@ -10,7 +10,7 @@ export default function MonthlySalesChart() {
   const { theme } = useTheme();
   const t = useTranslations("ecommerce");
   const options: ApexOptions = {
-    colors: ["#465FFF"],
+    colors: ["#00C853"],
     chart: {
       fontFamily: "Outfit, sans-serif",
       type: "bar",
@@ -102,12 +102,12 @@ export default function MonthlySalesChart() {
         colorStops: [
           {
             offset: 0,
-            color: "#7592FF",
+            color: "#1ED16F",
             opacity: 1,
           },
           {
             offset: 100,
-            color: "#465FFF",
+            color: "#00C853",
             opacity: 1,
           },
         ],
