@@ -15,37 +15,44 @@ import Buttons from "@/pages/others/ui-elements/buttons";
 import Images from "@/pages/others/ui-elements/images";
 import Videos from "@/pages/others/ui-elements/videos";
 import "flatpickr/dist/flatpickr.css";
-import { Route, Routes } from "react-router";
+import { Navigate, Outlet, Route, Routes } from "react-router";
+
+function ProtectedRoute() {
+  const isAuthenticated = localStorage.getItem("isAuthenticated") === "true";
+  return isAuthenticated ? <Outlet /> : <Navigate to="/signin" replace />;
+}
 
 export default function App() {
   return (
     <Routes>
-      {/* Dashboard Layout */}
-      <Route element={<AppLayout />}>
-        <Route index element={<EcommercePage />} />
+      {/* Protected Dashboard Layout */}
+      <Route element={<ProtectedRoute />}>
+        <Route element={<AppLayout />}>
+          <Route index element={<EcommercePage />} />
 
-        {/* Others Page */}
-        <Route path="/profile" element={<ProfilePage />} />
-        <Route path="/calendar" element={<CalendarPage />} />
-        <Route path="/blank" element={<BlankPage />} />
+          {/* Others Page */}
+          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/calendar" element={<CalendarPage />} />
+          <Route path="/blank" element={<BlankPage />} />
 
-        {/* Forms */}
-        <Route path="/form-elements" element={<FormElementsPage />} />
+          {/* Forms */}
+          <Route path="/form-elements" element={<FormElementsPage />} />
 
-        {/* Tables */}
-        <Route path="/basic-tables" element={<BasicTablesPage />} />
+          {/* Tables */}
+          <Route path="/basic-tables" element={<BasicTablesPage />} />
 
-        {/* Ui Elements */}
-        <Route path="/alerts" element={<Alerts />} />
-        <Route path="/avatars" element={<Avatars />} />
-        <Route path="/badge" element={<Badges />} />
-        <Route path="/buttons" element={<Buttons />} />
-        <Route path="/images" element={<Images />} />
-        <Route path="/videos" element={<Videos />} />
+          {/* Ui Elements */}
+          <Route path="/alerts" element={<Alerts />} />
+          <Route path="/avatars" element={<Avatars />} />
+          <Route path="/badge" element={<Badges />} />
+          <Route path="/buttons" element={<Buttons />} />
+          <Route path="/images" element={<Images />} />
+          <Route path="/videos" element={<Videos />} />
 
-        {/* Charts */}
-        <Route path="/line-chart" element={<LineChartPage />} />
-        <Route path="/bar-chart" element={<BarChartPage />} />
+          {/* Charts */}
+          <Route path="/line-chart" element={<LineChartPage />} />
+          <Route path="/bar-chart" element={<BarChartPage />} />
+        </Route>
       </Route>
 
       {/* Auth Layout */}

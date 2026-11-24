@@ -112,10 +112,16 @@ export default function AppHeader() {
         {/* Right side content */}
         <div
           className={cn(
-            "flex w-full items-center justify-between gap-4 px-5 py-4 shadow-theme-md xl:flex xl:justify-end xl:px-0 xl:shadow-none",
+            "flex w-full flex-wrap items-center justify-between gap-3 px-5 py-4 shadow-theme-md xl:flex xl:flex-nowrap xl:justify-end xl:gap-4 xl:px-0 xl:shadow-none",
             isApplicationMenuOpen ? "flex" : "hidden",
           )}
         >
+          {/* Store Location Tag */}
+          <div className="flex items-center gap-1.5 rounded-lg border border-brand-200 bg-brand-50 px-3 py-1.5 text-xs font-medium text-brand-700 sm:text-sm dark:border-brand-500/30 dark:bg-brand-500/10 dark:text-brand-400">
+            <span className="size-2 shrink-0 rounded-full bg-brand-500" />
+            <span>Store - Delhi Bypass Rohtak</span>
+          </div>
+
           <div className="flex items-center gap-2 2xsm:gap-3">
             <ThemeToggleButton />
 
