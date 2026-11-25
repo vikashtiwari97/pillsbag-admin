@@ -14,6 +14,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useChangeLocale, useLocale, useTranslations } from "@/i18n";
 import { getLanguage, languages } from "@/i18n/languages";
 import type { Locale } from "@/i18n/routing";
+import { toast } from "react-toastify";
 import {
   ChevronDownIcon,
   GlobeIcon,
@@ -44,6 +45,7 @@ export default function UserDropdown() {
 
   const handleLogout = () => {
     logout();
+    toast.success("Logged out successfully!");
     navigate("/signin", { replace: true });
   };
 

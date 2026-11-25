@@ -39,13 +39,18 @@ const processQueue = (error: unknown, token: string | null = null) => {
   failedQueue = [];
 };
 
-// Response Interceptor: 401 aane par refreshToken se naya accessToken lega
+// Response Interceptor: 401 aane par refreshToken se naya accessToken lega (Login route ko chhod kar)
 api.interceptors.response.use(
   (response) => response,
   async (error: AxiosError) => {
     const originalRequest = error.config as InternalAxiosRequestConfig & {
       _retry?: boolean;
     };
+
+    // Agar login API par 401 (Invalid Credentials) aaya hai, to page reload mat karo, seedha SignIn ko error do
+    if (originalRequest?.url?.includes("/admin/loginadmin")) {
+      return Promise.reject(error);
+    }
 
     if (error.response?.status === 401 && !originalRequest._retry) {
       if (isRefreshing) {
@@ -69,12 +74,13 @@ api.interceptors.response.use(
       if (!refreshToken) {
         isRefreshing = false;
         localStorage.clear();
-        window.location.href = "/signin";
+        if (window.location.pathname !== "/signin") {
+          window.location.href = "/signin";
+        }
         return Promise.reject(error);
       }
 
       try {
-        // Backend refresh endpoint (agar path alag ho to yahan update kar lein)
         const res = await axios.post(`${BASE_URL}/admin/refreshtoken`, {
           refreshToken,
         });
@@ -94,7 +100,9 @@ api.interceptors.response.use(
       } catch (refreshError) {
         processQueue(refreshError, null);
         localStorage.clear();
-        window.location.href = "/signin";
+        if (window.location.pathname !== "/signin") {
+          window.location.href = "/signin";
+        }
         return Promise.reject(refreshError);
       } finally {
         isRefreshing = false;
