@@ -4,21 +4,36 @@ import { EyeCloseIcon, EyeIcon } from "@/icons";
 import { cn } from "@/utils";
 import logo from "@/assets/Pill-Bag-Logo.png";
 import PageLoader from "@/components/shared/page-loader";
+import { useAuth } from "@/contexts/AuthContext";
+import { toast } from "react-toastify";
+import axios from "axios";
 
 export default function SignIn() {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const { loginAdmin } = useAuth();
   const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    setTimeout(() => {
-      localStorage.setItem("isAuthenticated", "true");
-      navigate("/");
-    }, 5000);
+
+    try {
+      await loginAdmin(email, password);
+      toast.success("Admin Logged In!");
+      navigate("/", { replace: true });
+    } catch (err) {
+      if (axios.isAxiosError(err)) {
+        toast.error(err.response?.data?.message || "Invalid email or password!");
+      } else {
+        toast.error("Something went wrong. Please try again.");
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (

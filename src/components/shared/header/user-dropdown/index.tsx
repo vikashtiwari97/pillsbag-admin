@@ -10,12 +10,12 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown";
+import { useAuth } from "@/contexts/AuthContext";
 import { useChangeLocale, useLocale, useTranslations } from "@/i18n";
 import { getLanguage, languages } from "@/i18n/languages";
 import type { Locale } from "@/i18n/routing";
 import {
   ChevronDownIcon,
-  GearIcon,
   GlobeIcon,
   InfoCircleIcon,
   LogOutIcon,
@@ -32,6 +32,7 @@ export default function UserDropdown() {
   const changeLocale = useChangeLocale();
   const { pathname } = useLocation();
   const [isOpen, setIsOpen] = useState(false);
+  const { user, logout } = useAuth();
 
   const currentLang = getLanguage(locale);
   const CurrentFlagIcon = currentLang.FlagIcon;
@@ -41,14 +42,33 @@ export default function UserDropdown() {
     navigate(pathname, { replace: true });
   };
 
+  const handleLogout = () => {
+    logout();
+    navigate("/signin", { replace: true });
+  };
+
   return (
     <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
       <DropdownMenuTrigger className="dropdown-toggle flex items-center text-gray-700 dark:text-gray-400">
-        <span className="me-3 h-11 w-11 overflow-hidden rounded-lg">
-          <img src="/images/user/owner.png" alt="User" className="size-11" />
+        <span className="me-3 flex h-11 w-11 items-center justify-center rounded-xl border border-brand-200 bg-brand-50 text-brand-600 dark:border-brand-500/30 dark:bg-brand-500/15 dark:text-brand-400">
+          <svg
+            className="size-6"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10" />
+            <circle cx="12" cy="10" r="3" />
+            <path d="M7 18.5a6.5 6.5 0 0 1 10 0" />
+          </svg>
         </span>
 
-        <span className="me-1 block text-sm font-medium">Musharof</span>
+        <span className="me-1 block text-sm font-medium">
+          {user?.roleId?.name || "Admin"}
+        </span>
 
         <ChevronDownIcon
           className={cn(
@@ -61,10 +81,10 @@ export default function UserDropdown() {
       <DropdownMenuContent align="end" sideOffset={12} className="w-65 p-3">
         <div className="px-3 py-2">
           <span className="block text-sm font-medium text-gray-700 dark:text-gray-400">
-            Musharof Chowdhury
+            {user?.roleId?.name || "Admin"}
           </span>
           <span className="mt-0.5 block text-xs text-gray-500 dark:text-gray-400">
-            randomuser@pimjo.com
+            {user?.email || "vikash@pillsbag.com"}
           </span>
         </div>
 
@@ -73,11 +93,6 @@ export default function UserDropdown() {
         <DropdownMenuItem render={<Link to="/profile" />}>
           <UserCircleIcon className="size-6" />
           {t("editProfile")}
-        </DropdownMenuItem>
-
-        <DropdownMenuItem render={<Link to="/profile" />}>
-          <GearIcon className="size-6" />
-          {t("accountSettings")}
         </DropdownMenuItem>
 
         <DropdownMenuItem render={<Link to="/profile" />}>
@@ -147,7 +162,11 @@ export default function UserDropdown() {
 
         <DropdownMenuSeparator />
 
-        <DropdownMenuItem variant="destructive" render={<Link to="/signin" />}>
+        <DropdownMenuItem
+          variant="destructive"
+          onClick={handleLogout}
+          className="cursor-pointer"
+        >
           <LogOutIcon />
           {t("signOut")}
         </DropdownMenuItem>

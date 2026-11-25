@@ -1,4 +1,5 @@
 import AppLayout from "@/components/layout/app-layout";
+import { useAuth } from "@/contexts/AuthContext";
 import CalendarPage from "@/pages/main/calendar";
 import EcommercePage from "@/pages/main/dashboard/ecommerce";
 import FormElementsPage from "@/pages/main/forms/form-elements";
@@ -18,8 +19,15 @@ import "flatpickr/dist/flatpickr.css";
 import { Navigate, Outlet, Route, Routes } from "react-router";
 
 function ProtectedRoute() {
-  const isAuthenticated = localStorage.getItem("isAuthenticated") === "true";
-  return isAuthenticated ? <Outlet /> : <Navigate to="/signin" replace />;
+  const { isAuthenticated } = useAuth();
+  const hasToken = isAuthenticated || Boolean(localStorage.getItem("accessToken"));
+  return hasToken ? <Outlet /> : <Navigate to="/signin" replace />;
+}
+
+function PublicRoute() {
+  const { isAuthenticated } = useAuth();
+  const hasToken = isAuthenticated || Boolean(localStorage.getItem("accessToken"));
+  return hasToken ? <Navigate to="/" replace /> : <Outlet />;
 }
 
 export default function App() {
@@ -56,8 +64,10 @@ export default function App() {
       </Route>
 
       {/* Auth Layout */}
-      <Route element={<AuthLayout />}>
-        <Route path="/signin" element={<SignInPage />} />
+      <Route element={<PublicRoute />}>
+        <Route element={<AuthLayout />}>
+          <Route path="/signin" element={<SignInPage />} />
+        </Route>
       </Route>
 
       {/* Full-width / Error / Status Pages */}

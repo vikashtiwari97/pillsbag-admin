@@ -10,6 +10,7 @@ import {
   InputGroupInput,
 } from "@/components/ui/input-group";
 import { useSidebar } from "@/components/ui/sidebar";
+import { useAuth } from "@/contexts/AuthContext";
 import { useTranslations } from "@/i18n";
 import { HorizontalDotsIcon, MenuTwoIcon, SearchIcon, XIcon } from "@/icons";
 import { cn } from "@/utils";
@@ -22,6 +23,7 @@ export default function AppHeader() {
   const inputRef = useRef<HTMLInputElement>(null);
   const [isApplicationMenuOpen, setApplicationMenuOpen] = useState(false);
   const { openMobile, toggleSidebar } = useSidebar();
+  const { user } = useAuth();
 
   const toggleApplicationMenu = () => {
     setApplicationMenuOpen(!isApplicationMenuOpen);
@@ -116,11 +118,13 @@ export default function AppHeader() {
             isApplicationMenuOpen ? "flex" : "hidden",
           )}
         >
-          {/* Store Location Tag */}
-          <div className="flex items-center gap-1.5 rounded-lg border border-brand-200 bg-brand-50 px-3 py-1.5 text-xs font-medium text-brand-700 sm:text-sm dark:border-brand-500/30 dark:bg-brand-500/10 dark:text-brand-400">
-            <span className="size-2 shrink-0 rounded-full bg-brand-500" />
-            <span>Store - Delhi Bypass Rohtak</span>
-          </div>
+          {/* Dynamic Store Location Tag */}
+          {user?.storeName && (
+            <div className="flex items-center gap-1.5 rounded-lg border border-brand-200 bg-brand-50 px-3 py-1.5 text-xs font-medium text-brand-700 sm:text-sm dark:border-brand-500/30 dark:bg-brand-500/10 dark:text-brand-400">
+              <span className="size-2 shrink-0 rounded-full bg-brand-500" />
+              <span>Store - {user.storeName}</span>
+            </div>
+          )}
 
           <div className="flex items-center gap-2 2xsm:gap-3">
             <ThemeToggleButton />
