@@ -1,10 +1,10 @@
 import AppLayout from "@/components/layout/app-layout";
 import { useAuth } from "@/contexts/AuthContext";
-import CalendarPage from "@/pages/main/calendar";
+import ChemistsPage from "@/pages/main/chemists/index";
 import EcommercePage from "@/pages/main/dashboard/ecommerce";
 import FormElementsPage from "@/pages/main/forms/form-elements";
 import { BlankPage, Error404Page } from "@/pages/main/pages";
-import ProfilePage from "@/pages/main/profile";
+import StoreAccountsPage from "@/pages/main/store-accounts/index";
 import BasicTablesPage from "@/pages/main/tables/basic-tables";
 import { AuthLayout, SignInPage } from "@/pages/others/auth";
 import BarChartPage from "@/pages/others/charts/bar-chart";
@@ -39,8 +39,8 @@ export default function App() {
           <Route index element={<EcommercePage />} />
 
           {/* Others Page */}
-          <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/calendar" element={<CalendarPage />} />
+          <Route path="/store-account" element={<StoreAccountsPage />} />
+          <Route path="/chemists" element={<ChemistsPage />} />
           <Route path="/blank" element={<BlankPage />} />
 
           {/* Forms */}

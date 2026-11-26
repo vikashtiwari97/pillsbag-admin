@@ -92,9 +92,9 @@ export default function UserDropdown() {
 
         <DropdownMenuSeparator />
 
-        <DropdownMenuItem render={<Link to="/profile" />}>
+        <DropdownMenuItem render={<Link to="/store-account" />}>
           <UserCircleIcon className="size-6" />
-          {t("editProfile")}
+          Store Account
         </DropdownMenuItem>
 
         <DropdownMenuItem render={<Link to="/profile" />}>

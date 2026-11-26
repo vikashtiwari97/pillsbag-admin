@@ -1,13 +1,12 @@
 import {
   BoxIcon,
-  CalendarIcon,
   LayoutGridIcon,
   ListIcon,
   PageIcon,
   PieChartIcon,
   PluginIcon,
   TableIcon,
-  UserCircleIcon,
+  UserIcon
 } from "@/icons";
 import type { NavItem } from "./types";
 
@@ -18,14 +17,9 @@ export const navItems: NavItem[] = [
     path: "/",
   },
   {
-    icon: <CalendarIcon className="size-6" />,
-    key: "calendar",
-    path: "/calendar",
-  },
-  {
-    icon: <UserCircleIcon className="size-6" />,
-    key: "userProfile",
-    path: "/profile",
+    icon: <UserIcon className="size-6" />,
+    key: "Chemists",
+    path: "/chemists",
   },
   {
     key: "forms",
