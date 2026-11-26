@@ -63,14 +63,14 @@ export interface ChemistPayload {
   };
 }
 
-// 1. Get All Chemists (with Backend Search & Pagination)
+// 1. Get All Chemists
 export const getAllChemistsService = async (params?: {
   page?: number;
   limit?: number;
   search?: string;
 }): Promise<PaginatedChemistsResponse> => {
   const response = await api.get<PaginatedChemistsResponse>(
-    "/admin/getallchemists",
+    "/chemist/getallchemists",
     { params },
   );
   return response.data;
@@ -78,13 +78,13 @@ export const getAllChemistsService = async (params?: {
 
 // 2. Get Single Chemist By ID
 export const getChemistByIdService = async (id: string): Promise<Chemist> => {
-  const response = await api.get<Chemist>(`/admin/getchemists/${id}`);
+  const response = await api.get<Chemist>(`/chemist/getchemists/${id}`);
   return response.data;
 };
 
 // 3. Create Chemist
 export const createChemistService = async (payload: ChemistPayload) => {
-  const response = await api.post("/admin/createchemists", payload);
+  const response = await api.post("/chemist/createchemists", payload);
   return response.data;
 };
 
@@ -93,12 +93,12 @@ export const updateChemistService = async (
   id: string,
   payload: Partial<ChemistPayload>,
 ) => {
-  const response = await api.put(`/admin/updatechemists/${id}`, payload);
+  const response = await api.put(`/chemist/updatechemists/${id}`, payload);
   return response.data;
 };
 
 // 5. Delete Chemist
 export const deleteChemistService = async (id: string) => {
-  const response = await api.delete(`/admin/deletechemists/${id}`);
+  const response = await api.delete(`/chemist/deletechemists/${id}`);
   return response.data;
 };

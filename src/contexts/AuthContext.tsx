@@ -60,7 +60,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const loginAdmin = async (email: string, password: string) => {
-    // Ensure latest admin roleId before login
     const roleId = adminRoleId || (await fetchAdminRoleId());
 
     const response = await api.post("/admin/loginadmin", {
@@ -69,14 +68,27 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       roleId,
     });
 
-    const { accessToken, refreshToken, data } = response.data;
+    // Dono formats handle karega (direct accessToken ya tokens.accessToken)
+    const accessToken =
+      response.data?.accessToken || response.data?.tokens?.accessToken;
+    const refreshToken =
+      response.data?.refreshToken || response.data?.tokens?.refreshToken;
+    const userData = response.data?.data || response.data?.admin;
+
+    if (!accessToken) {
+      throw new Error("Token not received from login API");
+    }
 
     localStorage.setItem("accessToken", accessToken);
-    localStorage.setItem("refreshToken", refreshToken);
-    localStorage.setItem("adminUser", JSON.stringify(data));
+    if (refreshToken) {
+      localStorage.setItem("refreshToken", refreshToken);
+    }
+    if (userData) {
+      localStorage.setItem("adminUser", JSON.stringify(userData));
+    }
     localStorage.setItem("isAuthenticated", "true");
 
-    setUser(data);
+    setUser(userData);
     setIsAuthenticated(true);
   };
 
